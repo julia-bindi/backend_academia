@@ -3,14 +3,14 @@ const jwt = require("jsonwebtoken");
 
 const { encryptor, messages } = require("../helpers");
 const { constants } = require("../utils");
-const { usersRepository } = require("../repositories");
+const { userRepository } = require("../repositories");
 const { promisify } = require("util");
 
-module.exports.isAdmin = async (token) => {
+module.exports.isTeacher = async (token) => {
     const verify = promisify(jwt.verify);
     const logged_user = await verify(token, constants.jwtToken);
     
-    const user = await usersRepository.getById( logged_user.id )
+    const user = await userRepository.getById( logged_user.id )
 
     if (!user) {
         throw {
@@ -19,7 +19,7 @@ module.exports.isAdmin = async (token) => {
         };
     }
 
-    if(!user.isAdmin) {
+    if(!user.type == "teacher") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
             message: messages.authMissing,
