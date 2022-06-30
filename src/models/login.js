@@ -28,5 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     })
   } 
 
+  Login.beforeSave(async (user, options) => {
+    const password = await encryptor.hashPassword(user.CPF);
+    if (user.changed("password")) {
+      Object.assign(user, { password });
+    }
+    return user;
+  });
+
   return Login;
 };
