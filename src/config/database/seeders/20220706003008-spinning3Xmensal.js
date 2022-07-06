@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert("Schemes", [
       {
         paymentFrequency: "Mensal",
-        modality: "Spinning Crossfit, Ritmos",
+        modality: "Spinning, Crossfit, Ritmos",
         trainingFrequency: 3,
         price: 155.0,
         createdAt: new Date(),
