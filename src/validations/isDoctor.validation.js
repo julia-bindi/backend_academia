@@ -19,10 +19,12 @@ module.exports.isDoctor = async (token) => {
         };
     }
 
-    if(!user.type == "doctor") {
+    if(user.type == "doctor") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
             message: messages.authMissing,
         };
     }
+
+    console.log("The user is a doctor")
 }
