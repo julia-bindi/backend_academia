@@ -4,7 +4,7 @@ const { CommonService } = require("../services")
 module.exports = {
     getschemes: async (req, res) => {
         try {
-            const response = await CommonService.gelSchemes()
+            const response = await CommonService.getSchemes()
             return res.status(StatusCodes.OK).json(response);
         } catch (error) {
             console.log(error);

@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isIn: [['monthly', 'semiannual', 'yearly']],
+          isIn: [['Mensal', 'Semestral', 'Anual']],
         }
       },
       trainingFrequency: {
