@@ -36,9 +36,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique:true,
-        validate: {
-          is: /(\d{2}\.?\d{3}\.?\d{3}\-?\d{1})/g,
-        }
       },
       birth: {
         type: Sequelize.DATE,
