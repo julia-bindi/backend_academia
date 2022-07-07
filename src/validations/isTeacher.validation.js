@@ -19,7 +19,7 @@ module.exports.isTeacher = async (token) => {
         };
     }
 
-    if(!user.type == "teacher") {
+    if(!user.type != "teacher") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
             message: messages.authMissing,
