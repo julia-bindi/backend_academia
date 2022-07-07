@@ -116,12 +116,27 @@ module.exports = {
                 message: messages.invalidPassword,
             };
         }
-        else if((type == 'cliente' && user.type == 'client') || (type == 'funcioario' && user.type != 'client')) {
-            throw {
-                status: StatusCodes.UNAUTHORIZED,
-                message: messages.invalidPassword,
-            };
-        }        
+        else {
+            if(type == 'cliente') {
+                if(user.type != 'client'){
+                    throw {
+                        status: StatusCodes.UNAUTHORIZED,
+                        message: messages.invalidFields,
+                    };
+                }
+            }
+            else {
+                if(type == 'funcionario'){
+                    if(user.type == 'client'){
+                        throw {
+                            status: StatusCodes.UNAUTHORIZED,
+                            message: messages.invalidFields,
+                        };
+                    }
+                } 
+            }
+        }
+        
 
         const payload = {
             id: user.id,
