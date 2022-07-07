@@ -19,6 +19,7 @@ module.exports.isDoctor = async (token) => {
         };
     }
 
+    console.log(user.type)
     if(user.type == "doctor") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
