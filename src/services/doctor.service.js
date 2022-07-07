@@ -10,6 +10,7 @@ module.exports = {
     newExam: async (CPF, weight, height, pressure, fat, leanMass, IMC, able) => {
         const exam = await examRepository.get({ CPF })
         console.log("Exame pego do banco")
+        console.log(exam)
         
         if(exam){
             throw{
@@ -31,7 +32,9 @@ module.exports = {
             updated_at: new Date(),
         }
 
-        ne = await examRepository.create(newExam)
+        console.log("Adiconando exame")
+
+        //ne = await examRepository.create(newExam)
 
         return ne
     }
