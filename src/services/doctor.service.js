@@ -34,7 +34,7 @@ module.exports = {
 
         console.log("Adiconando exame")
 
-        //ne = await examRepository.create(newExam)
+        ne = await examRepository.create(newExam)
 
         return ne
     }

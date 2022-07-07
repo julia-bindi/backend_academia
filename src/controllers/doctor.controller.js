@@ -24,9 +24,9 @@ module.exports = {
             const [scheme, token]  = req.headers.authorization.split(" ");
             const { CPF, weight, height, pressure, fat, leanMass, IMC, able } = req.body;
 
-            doctorValidation.isDoctor(token)
+            await doctorValidation.isDoctor(token)
 
-            //const response = await DoctorService.newExam(CPF, weight, height, pressure, fat, leanMass, IMC, able)
+            const response = await DoctorService.newExam(CPF, weight, height, pressure, fat, leanMass, IMC, able)
             return res.status(StatusCodes.OK).json({teste:"ok"});
         } catch (error) {
             console.log(error);
