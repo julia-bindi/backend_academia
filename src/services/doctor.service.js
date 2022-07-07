@@ -11,6 +11,12 @@ module.exports = {
         const exam = await examRepository.get({ CPF })
         console.log("Exame pego do banco")
         
+        if(exam){
+            throw{
+                status: StatusCodes.CONFLICT,
+                message: messages.alreadyExists("exam"),
+            };
+        }
 
         newExam = {
             CPF,
@@ -25,6 +31,8 @@ module.exports = {
             updated_at: new Date(),
         }
 
-        return await examRepository.create(newExam)
+        ne = await examRepository.create(newExam)
+
+        return ne
     }
 }
