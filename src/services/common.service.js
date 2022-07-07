@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const { encryptor, messages } = require("../helpers");
 const { constants } = require("../utils");
-const { schemeRepository } = require("../repositories");
+const { schemeRepository, userRepository, loginRepository } = require("../repositories");
 const { promisify } = require("util");
 
 
@@ -88,5 +88,50 @@ module.exports = {
         console.log("[Common] [GET schemes] group by payment frequency")
 
         return groupByPaymentFrequency
+    },
+
+    login: async (CPF, password, type) => {
+        const user = await userRepository.get({ CPF })
+        console.log("CPF: " + user.CPF)
+        if(!user){
+            throw{
+                status: StatusCodes.NOT_FOUND,
+                message: messages.notFound("user"),
+            };   
+        }
+
+        const login = await loginRepository.get({ CPF })
+
+        if(!login){
+            throw{
+                status: StatusCodes.NOT_FOUND,
+                message: messages.notFound("login"),
+            }; 
+        }
+
+        const valid = await encryptor.comparePassword(password, login.password);
+        if (!valid) {
+            throw {
+                status: StatusCodes.UNAUTHORIZED,
+                message: messages.invalidPassword,
+            };
+        }
+        else if((type == 'cliente' && user.type == 'client') || (type == 'funcioario' && user.type != 'client')) {
+            throw {
+                status: StatusCodes.UNAUTHORIZED,
+                message: messages.invalidPassword,
+            };
+        }        
+
+        const payload = {
+            id: user.id,
+            CPF: user.CPF,
+            type: user.type,
+        };
+
+        const sign = promisify(jwt.sign);
+        const token = await sign(payload, constants.jwtToken);
+
+        return { type: user.type, token };
     }
 }

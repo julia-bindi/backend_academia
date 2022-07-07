@@ -10,4 +10,6 @@ const corsoptions = {
 }
 
 router.get("/schemes", cors(corsoptions), CommonController.getschemes);
+router.post("/login", cors(corsoptions), CommonController.login);
+
 module.exports.common = router;

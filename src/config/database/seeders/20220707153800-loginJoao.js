@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("Users", [
+    return queryInterface.bulkInsert("Logins", [
       {
         CPF: "092.407.046-39",
         password: "$2a$08$saDSQxuOl1tpphSSeGYwKOYIy1ux5X2icD2gYx7.L3h9a9rDO77vG",
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Users", null, {});
+    return queryInterface.bulkDelete("Logins", null, {});
   }
 };

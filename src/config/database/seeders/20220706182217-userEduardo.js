@@ -8,7 +8,7 @@ module.exports = {
         type: 'teacher',
         name: "Eduardo B",
         RG: "PR-546123",
-        birth: "08/04/2000",
+        birth: "04/08/2000",
         fone: "998754213",
         email: "b.dudu@mail.com",
         imageName: null,

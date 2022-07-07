@@ -8,7 +8,7 @@ module.exports = {
         type: 'client',
         name: "Maria F",
         RG: "CL-123980",
-        birth: "13/05/2001",
+        birth: "05/13/2001",
         fone: "987654321",
         email: "f.Maria@mail.com",
         imageName: null,

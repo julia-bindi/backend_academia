@@ -8,7 +8,7 @@ module.exports = {
         type: 'secretary',
         name: "Renata L",
         RG: "SE- 654123",
-        birth: "12/02/1999",
+        birth: "02/12/1999",
         fone: "123654456",
         email: "l.renata@mail.com",
         imageName: null,

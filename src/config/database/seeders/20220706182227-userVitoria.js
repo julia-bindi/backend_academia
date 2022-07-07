@@ -8,7 +8,7 @@ module.exports = {
         type: 'doctor',
         name: "Vitoria F",
         RG: "ME-456123",
-        birth: "06/11/1997",
+        birth: "11/06/1997",
         fone: "854612365",
         email: "f.vitoria@mail.com",
         imageName: null,

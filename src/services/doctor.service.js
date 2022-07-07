@@ -11,12 +11,10 @@ module.exports = {
         const exam = await examRepository.get({ CPF })
 
         if(exam){
-            if(!exam.isDelected){
-                throw{
-                    status: StatusCodes.CONFLICT,
-                    message: messages.alreadyExists("exam"),
-                };
-            }    
+            throw{
+                status: StatusCodes.CONFLICT,
+                message: messages.alreadyExists("exam"),
+            };
         }
 
         newExam = {
