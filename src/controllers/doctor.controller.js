@@ -27,7 +27,7 @@ module.exports = {
             await doctorValidation.isDoctor(token)
 
             const response = await DoctorService.newExam(CPF, weight, height, pressure, fat, leanMass, IMC, able)
-            return res.status(StatusCodes.OK).json({teste:"ok"});
+            return res.status(StatusCodes.OK).json(response);
         } catch (error) {
             console.log(error);
             return res
