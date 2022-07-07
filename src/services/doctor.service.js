@@ -9,7 +9,7 @@ const { promisify } = require("util");
 module.exports = {
     newExam: async (CPF, weight, height, pressure, fat, leanMass, IMC, able) => {
         const exam = await examRepository.get({ CPF })
-
+        console.log("Exame pego do banco")
         if(exam){
             throw{
                 status: StatusCodes.CONFLICT,
