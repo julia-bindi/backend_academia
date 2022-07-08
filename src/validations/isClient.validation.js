@@ -18,8 +18,8 @@ module.exports.isClient = async (token) => {
             message: messages.notFound("user"),
         };
     }
-
-    if(!user.type != "client") {
+    
+    if(user.type != "client") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
             message: messages.authMissing,
