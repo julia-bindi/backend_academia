@@ -117,7 +117,7 @@ module.exports = {
             };
         }
         else {
-            if(type == 'cliente') {
+            if(type == 'client') {
                 if(user.type != 'client'){
                     throw {
                         status: StatusCodes.UNAUTHORIZED,
@@ -126,7 +126,7 @@ module.exports = {
                 }
             }
             else {
-                if(type == 'funcionario'){
+                if(type == 'employer'){
                     if(user.type == 'client'){
                         throw {
                             status: StatusCodes.UNAUTHORIZED,
@@ -137,7 +137,6 @@ module.exports = {
             }
         }
         
-
         const payload = {
             id: user.id,
             CPF: user.CPF,
@@ -146,6 +145,8 @@ module.exports = {
 
         const sign = promisify(jwt.sign);
         const token = await sign(payload, constants.jwtToken);
+
+        console.log("User " + user.name + " made login")
 
         return { type: user.type, token };
     }
