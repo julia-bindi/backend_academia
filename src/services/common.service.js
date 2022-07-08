@@ -149,5 +149,18 @@ module.exports = {
         console.log("User " + user.name + " made login")
 
         return { type: user.type, token };
+    },
+
+    getUser: async (userId) => {
+        const user = await userRepository.getById(userId)
+
+        if(!user){
+            throw{
+                status: StatusCodes.notFound,
+                message: messages.notFound("user"),
+            };
+        }
+
+        return user
     }
 }
