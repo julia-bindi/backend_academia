@@ -4,7 +4,7 @@ const { doctorValidation } = require("../validations")
 const yup = require("yup");
 
 module.exports = {
-    getschemes: async (req, res) => {
+    newExam: async (req, res) => {
         try {
             const schema = yup.object().shape({
                 CPF: yup.string().required(),

@@ -19,7 +19,7 @@ module.exports.isSecretary = async (token) => {
         };
     }
 
-    if(!user.type != "secretary") {
+    if(user.type != "secretary") {
         throw {
             status: StatusCodes.NOT_ACCEPTABLE,
             message: messages.authMissing,

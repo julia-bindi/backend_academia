@@ -1,14 +1,15 @@
 const router = require("express").Router();
 const cors = require("cors");
-const { DoctorController } = require("../controllers");
+const { SecretaryController } = require("../controllers");
 const { isAuthorized } = require("../middlewares");
 
 const corsoptions = {
   origin: "*",
-  methods: ['GET', 'POST'],
+  methods: ['GET'],
   allowedHeaders: ['Content-Type','Authorization', 'Content-Length','X-Requested-With'],
   optionsSuccessStatus: 200
 }
 
-router.use(isAuthorized).post("/", cors(corsoptions), DoctorController.newExam);
-module.exports.doctor = router;
+router.use(isAuthorized).get("/exam", cors(corsoptions), SecretaryController.getExam);
+
+module.exports.secretary = router;

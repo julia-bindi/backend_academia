@@ -5,7 +5,7 @@ const { isAuthorized } = require("../middlewares");
 
 const corsoptions = {
   origin: "*",
-  methods: ['GET'],
+  methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type','Authorization', 'Content-Length','X-Requested-With'],
   optionsSuccessStatus: 200
 }
