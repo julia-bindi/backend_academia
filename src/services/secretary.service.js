@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const { encryptor, messages } = require("../helpers");
 const { constants } = require("../utils");
-const { examRepository } = require("../repositories");
+const { examRepository, userRepository } = require("../repositories");
 const { promisify } = require("util");
 
 module.exports = {
@@ -20,5 +20,30 @@ module.exports = {
         }
 
         return exam
+    },
+
+    newUser: async (CPF, type, name, RG, birth, fone, email) => {
+        const user = await userRepository.get({ CPF })
+
+        if(user){
+            throw{
+                status: StatusCodes.CONFLICT,
+                message: messages.alreadyExists("user"),
+            };
+        }
+
+        newUser = {
+            CPF,
+            type,
+            name,
+            RG,
+            birth,
+            fone,
+            email
+        }
+
+        const saved = await userRepository.create(newUser)
+
+        return saved
     }
 }
