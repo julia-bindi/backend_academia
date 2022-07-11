@@ -6,7 +6,7 @@ module.exports = {
       {
         userId: 2,
         schemeId: 7,
-        timeId: [25,26,27,28,29],
+        timeId: [26,27,28,29,30,91],
         createdAt: new Date(),
         updatedAt: new Date(),
       },
