@@ -11,5 +11,7 @@ const corsoptions = {
 }
 
 router.use(isAuthorized).get("/exam", cors(corsoptions), ClientController.getExam);
+router.use(isAuthorized).get("/registration", cors(corsoptions), ClientController.getRegistrations);
+router.use(isAuthorized).get("/training", cors(corsoptions), ClientController.getTraining);
 
 module.exports.client = router;

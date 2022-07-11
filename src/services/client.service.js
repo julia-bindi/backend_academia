@@ -3,8 +3,17 @@ const jwt = require("jsonwebtoken");
 
 const { encryptor, messages } = require("../helpers");
 const { constants } = require("../utils");
-const { examRepository } = require("../repositories");
+const { examRepository, registrationRepository, classRepository, trainingRepository, exerciseRepository } = require("../repositories");
 const { promisify } = require("util");
+const { Op } = require("sequelize");
+
+function groupBy (array, key) {
+	return array.reduce((acc, item) => ({
+      ...acc,
+      [item[key]]: [...(acc[item[key]] ?? []), item],
+    }),
+  {})
+}
 
 module.exports = {
     getExam: async (clientCPF) => {
@@ -18,5 +27,54 @@ module.exports = {
         }
 
         return exam
+    },
+
+    getRegistrations: async (clientId) => {
+        const registrations = await registrationRepository.get({ id: clientId })
+
+        if(!registrations){
+            throw{
+                status: StatusCodes.notFound,
+                message: messages.notFound("registrations"),
+            };
+        }
+
+        const classes = await classRepository.list({ where: { id: { [Op.or]: registrations['timeId'] }}})
+
+        return groupBy(classes['rows'], 'modality')
+    },
+
+    getTraining: async (clientId) => {
+        const registration = await registrationRepository.get({ id: clientId })
+
+        if(!registration){
+            throw{
+                status: StatusCodes.notFound,
+                message: messages.notFound("registration"),
+            };
+        }
+
+        
+        const training = await trainingRepository.list({ where: { resgistraionId: registration.id }})
+
+        if(!training){
+            throw{
+                status: StatusCodes.notFound,
+                message: messages.notFound("training"),
+            };
+        }
+
+        trn = []
+        for (const t of training['rows']) {
+            const e = await exerciseRepository.get({ id: t.exerciseId})
+            trn.push({
+                groupMuscle: e.groupMuscle,
+                exercise: e.exercise,
+                repetitions: t.repetitions,
+                card: t.card
+            })
+        }
+
+        return groupBy(trn, 'groupMuscle')
     }
 }

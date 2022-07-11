@@ -24,5 +24,43 @@ module.exports = {
                 .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
                 .json(error.messages);
         }
+    },
+
+    getRegistrations: async (req, res) => {
+        try {  
+            const [scheme, token]  = req.headers.authorization.split(" ");
+
+            const verify = promisify(jwt.verify);
+            const logged_user = await verify(token, constants.jwtToken);
+
+            await clientValidation.isClient(token)
+
+            const response = await ClientService.getRegistrations(logged_user.id)
+            return res.status(StatusCodes.OK).json(response);
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
+                .json(error.messages);
+        }
+    },
+
+    getTraining: async (req, res) => {
+        try {  
+            const [scheme, token]  = req.headers.authorization.split(" ");
+
+            const verify = promisify(jwt.verify);
+            const logged_user = await verify(token, constants.jwtToken);
+
+            await clientValidation.isClient(token)
+
+            const response = await ClientService.getTraining(logged_user.id)
+            return res.status(StatusCodes.OK).json(response);
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
+                .json(error.messages);
+        }
     }
 }
