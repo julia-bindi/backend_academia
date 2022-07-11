@@ -10,5 +10,10 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
-router.use(isAuthorized).post("/", cors(corsoptions), DoctorController.newExam);
+router.options("/", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+
+router.use(isAuthorized)
+
+router.post("/", cors(corsoptions), DoctorController.newExam);
+
 module.exports.doctor = router;

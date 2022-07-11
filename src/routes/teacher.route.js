@@ -10,6 +10,8 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
-router.use(isAuthorized).get("/exercises", cors(corsoptions), TeacherController.getExercises);
+router.use(isAuthorized)
+
+router.get("/exercises", cors(corsoptions), TeacherController.getExercises);
 
 module.exports.teacher = router;

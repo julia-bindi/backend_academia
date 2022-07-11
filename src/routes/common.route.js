@@ -10,8 +10,13 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
+router.options("/login", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+
 router.get("/schemes", cors(corsoptions), CommonController.getschemes);
 router.post("/login", cors(corsoptions), CommonController.login);
-router.use(isAuthorized).get("/user", cors(corsoptions), CommonController.getUser);
+
+router.use(isAuthorized)
+
+router.get("/user", cors(corsoptions), CommonController.getUser);
 
 module.exports.common = router;

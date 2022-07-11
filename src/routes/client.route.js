@@ -10,8 +10,10 @@ const corsoptions = {
     optionsSuccessStatus: 200
 }
 
-router.use(isAuthorized).get("/exam", cors(corsoptions), ClientController.getExam);
-router.use(isAuthorized).get("/registration", cors(corsoptions), ClientController.getRegistrations);
-router.use(isAuthorized).get("/training", cors(corsoptions), ClientController.getTraining);
+router.use(isAuthorized)
+
+router.get("/exam", cors(corsoptions), ClientController.getExam);
+router.get("/registration", cors(corsoptions), ClientController.getRegistrations);
+router.get("/training", cors(corsoptions), ClientController.getTraining);
 
 module.exports.client = router;

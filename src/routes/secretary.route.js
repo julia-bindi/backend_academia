@@ -10,7 +10,11 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
-router.use(isAuthorized).get("/exam", cors(corsoptions), SecretaryController.getExam);
-router.use(isAuthorized).post("/user", cors(corsoptions), SecretaryController.newUser);
+router.options("/user", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+
+router.use(isAuthorized)
+
+router.get("/exam", cors(corsoptions), SecretaryController.getExam);
+router.post("/user", cors(corsoptions), SecretaryController.newUser);
 
 module.exports.secretary = router;
