@@ -4,7 +4,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert("Trainings", [
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 1,
         repetitions: 30,
         card: 'A',
@@ -12,7 +12,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 2,
         repetitions: 30,
         card: 'A',
@@ -20,7 +20,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 3,
         repetitions: 30,
         card: 'A',
@@ -28,7 +28,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 4,
         repetitions: 30,
         card: 'A',
@@ -36,7 +36,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 13,
         repetitions: 30,
         card: 'A',
@@ -44,7 +44,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        resgistraionId: 1,
+        registrationId: 1,
         exerciseId: 14,
         repetitions: 30,
         card: 'A',

@@ -10,8 +10,11 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
+router.options("/training", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+
 router.use(isAuthorized)
 
 router.get("/exercises", cors(corsoptions), TeacherController.getExercises);
+router.post("/training", cors(corsoptions), TeacherController.newTraining);
 
 module.exports.teacher = router;
