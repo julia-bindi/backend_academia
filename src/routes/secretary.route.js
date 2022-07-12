@@ -16,5 +16,6 @@ router.use(isAuthorized)
 
 router.get("/exam", cors(corsoptions), SecretaryController.getExam);
 router.post("/user", cors(corsoptions), SecretaryController.newUser);
+router.get("/classes", cors(corsoptions), SecretaryController.getClasses);
 
 module.exports.secretary = router;
