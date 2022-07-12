@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const { encryptor, messages } = require("../helpers");
 const { constants } = require("../utils");
-const { examRepository, userRepository, classRepository, paymentRepository } = require("../repositories");
+const { examRepository, userRepository, classRepository, paymentRepository, registrationRepository } = require("../repositories");
 const { promisify } = require("util");
 
 module.exports = {
@@ -93,5 +93,29 @@ module.exports = {
         }
 
         return cl
+    },
+
+    newRegistration: async (CPF, schemeId, timeId) => {
+        const user = await userRepository.get({ CPF })
+
+        if(!user){
+            throw{
+                status: StatusCodes.NOT_FOUND,
+                message: messages.notFound("user"),
+            };
+        }
+        
+
+        const registration = {
+            userId: user.id,
+            schemeId,
+            timeId,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+
+        const saved = await registrationRepository.create(registration)
+
+        return saved
     }
 }

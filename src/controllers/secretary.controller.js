@@ -77,5 +77,33 @@ module.exports = {
                 .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
                 .json(error.messages);
         }
+    },
+
+    newRegistration: async (req, res) => {
+         try {
+            const schema = yup.object().shape({
+                CPF: yup.string().required(),
+                schemeId: yup.number().required(), 
+                timeId: yup.array().required()
+            });
+        
+        
+            await schema.validate(req.body, {
+                stripUnknown: true,
+            });
+            
+            const [scheme, token]  = req.headers.authorization.split(" ");
+            const { CPF, schemeId, timeId } = req.body;
+
+            await secretaryValidation.isSecretary(token)
+
+            const response = await SecretaryService.newRegistration(CPF, schemeId, timeId)
+            return res.status(StatusCodes.OK).json(response);
+        } catch (error) {
+            console.log(error);
+            return res
+                .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
+                .json(error.messages);
+        }
     }
 }

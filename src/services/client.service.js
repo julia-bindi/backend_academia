@@ -6,6 +6,7 @@ const { constants } = require("../utils");
 const { examRepository, registrationRepository, classRepository, trainingRepository, exerciseRepository } = require("../repositories");
 const { promisify } = require("util");
 const { Op } = require("sequelize");
+const { cls } = require("sequelize");
 
 function groupBy (array, key) {
 	return array.reduce((acc, item) => ({
@@ -30,7 +31,7 @@ module.exports = {
     },
 
     getRegistrations: async (clientId) => {
-        const registrations = await registrationRepository.get({ id: clientId })
+        const registrations = await registrationRepository.list({ where: { userId: clientId }})
 
         if(!registrations){
             throw{
@@ -38,10 +39,14 @@ module.exports = {
                 message: messages.notFound("registrations"),
             };
         }
+        let cls = []
+        for (const rg of registrations['rows']) {
+            const classes = await classRepository.list({ where: { id: { [Op.or]: rg['timeId'] }}})
+            cls = cls.concat(classes['rows'])
+        }
 
-        const classes = await classRepository.list({ where: { id: { [Op.or]: registrations['timeId'] }}})
 
-        return groupBy(classes['rows'], 'modality')
+        return groupBy(cls, 'modality')
     },
 
     getTraining: async (clientId) => {

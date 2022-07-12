@@ -11,11 +11,13 @@ const corsoptions = {
 }
 
 router.options("/user", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+router.options("/registration", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
 
 router.use(isAuthorized)
 
 router.get("/exam", cors(corsoptions), SecretaryController.getExam);
 router.post("/user", cors(corsoptions), SecretaryController.newUser);
 router.get("/classes", cors(corsoptions), SecretaryController.getClasses);
+router.post("/registration", cors(corsoptions), SecretaryController.newRegistration);
 
 module.exports.secretary = router;
