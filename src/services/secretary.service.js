@@ -69,9 +69,29 @@ module.exports = {
         }
 
         modalities = []
-        fo
-        cl = []
+        for (const cls of classes['rows']) {
+            if(!modalities.includes(cls.modality))
+                modalities.push(cls.modality)
+        }
 
-        return classes['rows']
+        cl = []
+        for(let i = 0 ; i<modalities.length; i++){
+            cl.push({
+                modality: modalities[i],
+                days: []
+            })
+
+            for (const cls of classes['rows']) {
+                if(cls.modality == modalities[i])
+                cl[i].days.push({
+                    id: cls.id,
+                    time: cls.time,
+                    weekDay: cls.weekDay,
+                    full: cls.full
+                })
+            }
+        }
+
+        return cl
     }
 }
