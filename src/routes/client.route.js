@@ -10,6 +10,10 @@ const corsoptions = {
     optionsSuccessStatus: 200
 }
 
+router.options("/exam", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+router.options("/registration", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+router.options("/training", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+
 router.use(isAuthorized)
 
 router.get("/exam", cors(corsoptions), ClientController.getExam);

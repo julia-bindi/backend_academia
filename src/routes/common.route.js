@@ -10,7 +10,9 @@ const corsoptions = {
   optionsSuccessStatus: 200
 }
 
+router.options("/schemes", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
 router.options("/login", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
+router.options("/user", cors(corsoptions), async (req, res) =>{ return res.status(StatusCodes.OK)})
 
 router.get("/schemes", cors(corsoptions), CommonController.getschemes);
 router.post("/login", cors(corsoptions), CommonController.login);
