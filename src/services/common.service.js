@@ -92,7 +92,7 @@ module.exports = {
 
     login: async (CPF, password, type) => {
         const user = await userRepository.get({ CPF })
-        console.log("CPF: " + user.CPF)
+        console.log("CPF: " + CPF)
         if(!user){
             throw{
                 status: StatusCodes.NOT_FOUND,
