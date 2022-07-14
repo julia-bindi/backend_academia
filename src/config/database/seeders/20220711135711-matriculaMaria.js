@@ -5,8 +5,15 @@ module.exports = {
     return queryInterface.bulkInsert("Registrations", [
       {
         userId: 2,
+        schemeId: 2,
+        timeId: [26,27,28],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        userId: 2,
         schemeId: 7,
-        timeId: [26,27,28,29,30,91],
+        timeId: [91],
         createdAt: new Date(),
         updatedAt: new Date(),
       },

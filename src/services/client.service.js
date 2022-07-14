@@ -50,7 +50,7 @@ module.exports = {
     },
 
     getTraining: async (clientId) => {
-        const registration = await registrationRepository.get({ id: clientId })
+        const registration = await registrationRepository.get({ [Op.and]: [{userId: clientId}, { schemeId: {[Op.or]: [7,8,9]}}]})
 
         if(!registration){
             throw{
@@ -58,9 +58,8 @@ module.exports = {
                 message: messages.notFound("registration"),
             };
         }
-
         
-        const training = await trainingRepository.list({ where: { resgistraionId: registration.id }})
+        const training = await trainingRepository.list({ where: { registrationId: registration.id }})
 
         if(!training){
             throw{
