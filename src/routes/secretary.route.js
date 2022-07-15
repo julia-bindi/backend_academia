@@ -17,7 +17,7 @@ router.options("/registration", cors(corsoptions), async (req, res) =>{ return r
 
 router.use(isAuthorized)
 
-router.get("/exam", cors(corsoptions), SecretaryController.getExam);
+router.post("/exam", cors(corsoptions), SecretaryController.getExam);
 router.post("/user", cors(corsoptions), SecretaryController.newUser);
 router.get("/classes", cors(corsoptions), SecretaryController.getClasses);
 router.post("/registration", cors(corsoptions), SecretaryController.newRegistration);
